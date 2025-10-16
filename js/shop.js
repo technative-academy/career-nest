@@ -19,6 +19,15 @@ class Shop {
                 this.searchContainer.querySelector('.search__sort')
         }
         this.cartCountEl = document.querySelector('.header__cart-count')
+        // Cart Elements
+        this.cartWrapper = document.querySelector('.cart-wrapper')
+        this.cartIcon = document.getElementById('cartIcon')
+        this.cartDropdown = document.getElementById('cartDropdown')
+        this.cartItems = document.getElementById('cartItems')
+        this.cartTotal = document.getElementById('cartTotal')
+        this.clearCartBtn = document.getElementById('clearCartBtn')
+        this.checkoutBtn = document.getElementById('checkoutBtn')
+        this.cartCountEl = document.querySelector('.header__cart-count')
     }
 
     init() {
