@@ -64,3 +64,11 @@
     color: var(--colour-primary);
     font-weight: bold;
 }
+
+.button--cart {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  position: relative;
+}
