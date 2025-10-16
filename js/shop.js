@@ -18,6 +18,7 @@ class Shop {
             this.sortSelect =
                 this.searchContainer.querySelector('.search__sort')
         }
+        this.cartCountEl = document.querySelector('.header__cart-count')
     }
 
     init() {
@@ -120,6 +121,18 @@ class Shop {
             productsItemPrice.classList.add('products__item-price')
             productsItemPrice.textContent = `£${product.price}`
             productsItem.appendChild(productsItemPrice)
+
+            const addToCartButton = document.createElement('button')
+            addToCartButton.classList.add(
+                'button',
+                'button--primary',
+                'products__item-cart'
+            )
+            addToCartButton.textContent = 'Add to Cart'
+            addToCartButton.addEventListener('click', () =>
+                this.addToCart(product, addToCartButton)
+            )
+            productsItem.appendChild(addToCartButton)
         })
     }
     sortProductsByPrice(products, order = 'asc') {
@@ -129,6 +142,26 @@ class Shop {
 
             return order === 'asc' ? priceA - priceB : priceB - priceA
         })
+    }
+
+    addToCart(product, button) {
+        const cart = JSON.parse(localStorage.getItem('cart')) || []
+
+        cart.push(product)
+        localStorage.setItem('cart', JSON.stringify(cart))
+
+        button.textContent = 'Added!'
+        button.disabled = true
+
+        this.updateCartCount()
+        console.log('Cart updated:', cart)
+        alert(`Added "${product.title}" to cart!`)
+    }
+    updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || []
+        if (this.cartCountEl) {
+            this.cartCountEl.textContent = cart.length
+        }
     }
 }
 
