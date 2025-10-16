@@ -1,3 +1,5 @@
+import Cart from './cart.js'
+
 class Shop {
     constructor() {
         this.searchContainer = document.querySelector('.search')
@@ -130,7 +132,7 @@ class Shop {
             )
             addToCartButton.textContent = 'Add to Cart'
             addToCartButton.addEventListener('click', () =>
-                this.addToCart(product, addToCartButton)
+                Cart.addToCart(product)
             )
             productsItem.appendChild(addToCartButton)
         })
