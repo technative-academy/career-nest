@@ -83,15 +83,4 @@
     margin-right: auto;
 }
 
-.header__cart {
-    margin-left: auto;
-}
 
-.header__cart-count {
-    background: #e63946;
-    color: white;
-    border-radius: 999px;
-    padding: 0.2em 0.6em;
-    font-size: 0.8rem;
-    margin-left: 0.25em;
-}
