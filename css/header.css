@@ -17,7 +17,7 @@
     justify-content: space-between;
     margin: 0 auto;
     align-items: center;
-    padding: 0 var(--spacing-l);
+    padding: 0 var(--spacing-xl);
 }
 
 .header__logo img {
@@ -71,4 +71,10 @@
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
+}
+
+@media (min-width: 800px) {
+    .header__content {
+        padding: 0;
+    }
 }
