@@ -22,7 +22,11 @@ class Cart {
 
             // Close dropdown on outside click
             document.addEventListener('click', (e) => {
-                if (!this.cartIcon.parentElement.contains(e.target)) {
+                const isClickInside =
+                    this.cartIcon.parentElement.contains(e.target) ||
+                    this.cartDropdown.contains(e.target)
+
+                if (!isClickInside) {
                     this.cartDropdown.classList.remove('cart__dropdown--show')
                 }
             })
@@ -77,7 +81,7 @@ class Cart {
         }
     }
 
-    addToCart(product) {
+    addToCart(product, button) {
         const cart = this.getCart()
         const existing = cart.find((item) => item.id === product.id)
 
@@ -92,13 +96,12 @@ class Cart {
                 quantity: 1,
             })
         }
-        button.textContent = 'Added!'
-        setTimeout(() => (button.textContent = 'Add to Cart'), 1000) // Revert after 1s
-
-        console.log('Cart updated:', cart)
 
         this.saveCart(cart)
         this.renderMiniCart()
+
+        button.textContent = 'Added!'
+        setTimeout(() => (button.textContent = 'Add to Cart'), 1000)
     }
 
     removeFromCart(index) {
@@ -144,9 +147,10 @@ class Cart {
             const removeBtn = document.createElement('button')
             removeBtn.classList.add('cart__item-remove')
             removeBtn.textContent = '✕'
-            removeBtn.addEventListener('click', () =>
+            removeBtn.addEventListener('click', (e) => {
+                e.stopPropagation() // Prevent dropdown from closing
                 this.removeFromCart(index)
-            )
+            })
 
             itemEl.appendChild(img)
             itemEl.appendChild(info)

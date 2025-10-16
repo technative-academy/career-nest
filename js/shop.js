@@ -132,7 +132,7 @@ class Shop {
             )
             addToCartButton.textContent = 'Add to Cart'
             addToCartButton.addEventListener('click', () =>
-                Cart.addToCart(product)
+                Cart.addToCart(product, addToCartButton)
             )
             productsItem.appendChild(addToCartButton)
         })
