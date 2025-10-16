@@ -19,15 +19,6 @@ class Shop {
                 this.searchContainer.querySelector('.search__sort')
         }
         this.cartCountEl = document.querySelector('.header__cart-count')
-        // Cart Elements
-        this.cartWrapper = document.querySelector('.cart-wrapper')
-        this.cartIcon = document.getElementById('cartIcon')
-        this.cartDropdown = document.getElementById('cartDropdown')
-        this.cartItems = document.getElementById('cartItems')
-        this.cartTotal = document.getElementById('cartTotal')
-        this.clearCartBtn = document.getElementById('clearCartBtn')
-        this.checkoutBtn = document.getElementById('checkoutBtn')
-        this.cartCountEl = document.querySelector('.header__cart-count')
     }
 
     init() {
@@ -151,26 +142,6 @@ class Shop {
 
             return order === 'asc' ? priceA - priceB : priceB - priceA
         })
-    }
-
-    addToCart(product, button) {
-        const cart = JSON.parse(localStorage.getItem('cart')) || []
-
-        cart.push(product)
-        localStorage.setItem('cart', JSON.stringify(cart))
-
-        button.textContent = 'Added!'
-        button.disabled = true
-
-        this.updateCartCount()
-        console.log('Cart updated:', cart)
-        alert(`Added "${product.title}" to cart!`)
-    }
-    updateCartCount() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || []
-        if (this.cartCountEl) {
-            this.cartCountEl.textContent = cart.length
-        }
     }
 }
 

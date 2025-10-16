@@ -34,17 +34,23 @@
                     </nav>
                 </div>
             </div>
-            <div class="cart-wrapper">
-                <button id="cartIcon" class="button button--cart">
-                    🛒 <span class="header__cart-count">0</span>
+            <div class="cart">
+                <button type="button" class="cart__icon">
+                    🛒
+                    <span class="cart__count">0</span>
                 </button>
-                <div id="cartDropdown" class="cart-dropdown">
-                    <div id="cartItems" class="cart-items"></div>
-                    <p id="cartTotal" class="cart-total"></p>
-                    <button id="clearCartBtn" class="button button--secondary">
+
+                <div class="cart__dropdown">
+                    <h3 class="cart__title">Your Cart</h3>
+
+                    <div class="cart__items"></div>
+
+                    <p class="cart__total">Total: £0</p>
+
+                    <button class="cart__button cart__button--clear">
                         Clear Cart
                     </button>
-                    <button id="checkoutBtn" class="button button--primary">
+                    <button class="cart__button cart__button--checkout">
                         Checkout
                     </button>
                 </div>
