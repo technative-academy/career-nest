@@ -92,6 +92,10 @@ class Cart {
                 quantity: 1,
             })
         }
+        button.textContent = 'Added!'
+        setTimeout(() => (button.textContent = 'Add to Cart'), 1000) // Revert after 1s
+
+        console.log('Cart updated:', cart)
 
         this.saveCart(cart)
         this.renderMiniCart()
