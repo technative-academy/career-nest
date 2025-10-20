@@ -55,7 +55,27 @@ class Ask {
     setExample(event) {
         event.preventDefault()
         console.log('setting example')
-        this.askInput.value = 'I want a job in Hobbiton!'
+
+        const exampleQuestions = [
+            'I want a job in Hobbiton!',
+            'How do I become a Jedi Knight in the Star Wars galaxy?',
+            'What career opportunities are there in Winterfell?',
+            'I want to work at Hogwarts School of Witchcraft and Wizardry',
+            'How do I get a job with the Ministry of Magic?',
+            'What positions are available on the Death Star?',
+            'I want to be a dragon trainer in Westeros',
+            'How do I become a Ranger of the North in Middle-earth?',
+            'What jobs are there in King\'s Landing?',
+            'I want to work for the Rebel Alliance',
+            'How do I become a wizard in the Shire?',
+            'What career paths are there in Narnia?',
+            'I want to join the Night\'s Watch at Castle Black',
+            'How do I get hired by Gringotts Wizarding Bank?',
+            'What jobs are available in the Marvel universe?'
+        ]
+
+        const randomIndex = Math.floor(Math.random() * exampleQuestions.length)
+        this.askInput.value = exampleQuestions[randomIndex]
         this.checkInput()
     }
 
