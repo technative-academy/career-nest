@@ -1,7 +1,8 @@
 /* Variables */
 :root {
-    --colour-primary: #854d19;
-    --colour-secondary: #f7aa52;
+    --colour-primary: #6200ea;
+    --colour-primary-rgb: 98, 0, 234; /* for background-color with opacity below */
+    --colour-secondary: #ff0080;
     --colour-background-white: white;
     --colour-background-light: #f0f0f0;
     --colour-background-dark: black;
@@ -22,13 +23,14 @@
     --font-size-body: 16px;
     --font-size-small: 12px;
     --font-weight-bold: bold;
-    --font-family-body: Arial, sans-serif;
+    --font-family-body: Papyrus, fantasy;
 
     --border-radius-s: 5px;
     --border-radius-m: 10px;
     --border-radius-l: 20px;
 
-    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --mobile-menu-background: rgba(var(--colour-primary-rgb), 0.9);
 }
 
 *,
