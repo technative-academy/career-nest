@@ -1,3 +1,5 @@
+import Cart from './cart.js'
+
 class Shop {
     constructor() {
         this.searchContainer = document.querySelector('.search')
@@ -18,6 +20,7 @@ class Shop {
             this.sortSelect =
                 this.searchContainer.querySelector('.search__sort')
         }
+        this.cartCountEl = document.querySelector('.header__cart-count')
     }
 
     init() {
@@ -120,6 +123,18 @@ class Shop {
             productsItemPrice.classList.add('products__item-price')
             productsItemPrice.textContent = `£${product.price}`
             productsItem.appendChild(productsItemPrice)
+
+            const addToCartButton = document.createElement('button')
+            addToCartButton.classList.add(
+                'button',
+                'button--primary',
+                'products__item-cart'
+            )
+            addToCartButton.textContent = 'Add to Cart'
+            addToCartButton.addEventListener('click', () =>
+                Cart.addToCart(product, addToCartButton)
+            )
+            productsItem.appendChild(addToCartButton)
         })
     }
     sortProductsByPrice(products, order = 'asc') {
