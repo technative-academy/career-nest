@@ -6,8 +6,8 @@ A Javascript project interacting with a custom API for product loading and ChatG
 
 - **Frontend**: Vanilla JavaScript (ES6 modules)
 - **API Integration**:
-    - ChatGPT API for job search
-    - Custom products API (`https://ai-project.technative.dev.f90.co.uk/products/careernest`)
+    - Products page updated from API source (`https://ai-project.technative.dev.f90.co.uk/products/careernest`)
+    - ChatGPT integration via API
 - **Architecture**: Class-based OOP with modular imports
 
 ## Features
