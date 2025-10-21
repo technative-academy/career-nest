@@ -4,23 +4,21 @@ class Shop {
     constructor() {
         this.searchContainer = document.querySelector('.search')
         if (this.searchContainer) {
-            this.searchInput =
-                this.searchContainer.querySelector('.search__input')
-            this.searchButton =
-                this.searchContainer.querySelector('.search__submit')
-            this.searchResultCount = this.searchContainer.querySelector(
-                '.search__result-count'
-            )
-            this.loading =
-                this.searchContainer.querySelector('.search__loading')
+            this.searchInput = this.searchContainer.querySelector('.search__input')
+            this.searchButton = this.searchContainer.querySelector('.search__submit')
+            this.searchResultCount = this.searchContainer.querySelector('.search__result-count')
+            this.loading = this.searchContainer.querySelector('.search__loading')
 
             this.productsContainer = document.querySelector('.products')
-            this.productsList =
-                this.productsContainer.querySelector('.products__list')
-            this.sortSelect =
-                this.searchContainer.querySelector('.search__sort')
+            this.productsList = this.productsContainer.querySelector('.products__list')
+            this.sortSelect = this.searchContainer.querySelector('.search__sort')
+
+            this.showMoreButton = this.productsContainer.querySelector('.products__show-more button')
         }
         this.cartCountEl = document.querySelector('.header__cart-count')
+        this.allProducts = []
+        this.displayedCount = 0
+        this.itemsPerPage = 6
     }
 
     init() {
@@ -31,6 +29,9 @@ class Shop {
         this.search()
         if (this.sortSelect) {
             this.sortSelect.addEventListener('change', () => this.search())
+        }
+        if (this.showMoreButton) {
+            this.showMoreButton.addEventListener('click', () => this.showMore())
         }
     }
 
@@ -49,8 +50,7 @@ class Shop {
             this.productsList.removeChild(this.productsList.lastChild)
         }
 
-        const url =
-            'https://ai-project.technative.dev.f90.co.uk/products/careernest'
+        const url = 'https://ai-project.technative.dev.f90.co.uk/products/careernest'
         try {
             const response = await fetch(url)
             if (!response.ok) {
@@ -73,11 +73,7 @@ class Shop {
 
     processProducts(data) {
         const searchTerm = this.searchInput.value.toLowerCase()
-        const filteredProducts = data.filter(
-            (product) =>
-                product.title.toLowerCase().includes(searchTerm) ||
-                product.description.toLowerCase().includes(searchTerm)
-        )
+        const filteredProducts = data.filter((product) => product.title.toLowerCase().includes(searchTerm) || product.description.toLowerCase().includes(searchTerm))
         console.log(data)
 
         this.searchResultCount.textContent = `${filteredProducts.length} products found`
@@ -88,12 +84,20 @@ class Shop {
             this.productsContainer.classList.remove('is-shown')
         }
         const sortOrder = this.sortSelect ? this.sortSelect.value : 'asc'
-        const sortedProducts = this.sortProductsByPrice(
-            filteredProducts,
-            sortOrder
-        )
+        const sortedProducts = this.sortProductsByPrice(filteredProducts, sortOrder)
 
-        sortedProducts.forEach((product) => {
+        // Store all products and reset display count
+        this.allProducts = sortedProducts
+        this.displayedCount = 0
+
+        // Display first batch
+        this.displayProducts()
+    }
+
+    displayProducts() {
+        const productsToShow = this.allProducts.slice(this.displayedCount, this.displayedCount + this.itemsPerPage)
+
+        productsToShow.forEach((product) => {
             const productsItem = document.createElement('div')
             productsItem.classList.add('products__item')
             this.productsList.appendChild(productsItem)
@@ -125,17 +129,25 @@ class Shop {
             productsItem.appendChild(productsItemPrice)
 
             const addToCartButton = document.createElement('button')
-            addToCartButton.classList.add(
-                'button',
-                'button--primary',
-                'products__item-cart'
-            )
+            addToCartButton.classList.add('button', 'button--primary', 'products__item-cart')
             addToCartButton.textContent = 'Add to Cart'
-            addToCartButton.addEventListener('click', () =>
-                Cart.addToCart(product, addToCartButton)
-            )
+            addToCartButton.addEventListener('click', () => Cart.addToCart(product, addToCartButton))
             productsItem.appendChild(addToCartButton)
         })
+
+        this.displayedCount += productsToShow.length
+
+        // Hide "Show more" button if all products are displayed
+        const showMoreContainer = this.productsContainer.querySelector('.products__show-more')
+        if (this.displayedCount >= this.allProducts.length) {
+            showMoreContainer.style.display = 'none'
+        } else {
+            showMoreContainer.style.display = 'block'
+        }
+    }
+
+    showMore() {
+        this.displayProducts()
     }
     sortProductsByPrice(products, order = 'asc') {
         return products.sort((a, b) => {
