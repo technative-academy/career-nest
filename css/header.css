@@ -1,10 +1,7 @@
 /* Menu */
 .header {
-    background: linear-gradient(
-        to bottom left,
-        var(--colour-primary),
-        var(--colour-secondary)
-    );
+    background: url('../images/space-background2.jpg');
+    background-size: cover;
     color: var(--colour-text-light);
     padding-top: var(--spacing-l);
     padding-bottom: var(--spacing-xxl);
@@ -55,11 +52,10 @@
     height: 100px;
 }
 
-
 .header__content .header__title {
-  flex: 1;
-  text-align: left;
-  margin: 0;
+    flex: 1;
+    text-align: left;
+    margin: 0;
 }
 
 .header__link {
@@ -120,5 +116,3 @@
         padding: 0;
     }
 }
-
-
