@@ -1,4 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+@font-face {
+    font-family: 'Papyrus';
+    src:
+        url('../assets/fonts/Papyrus-Regular.woff2') format('woff2'),
+        url('../assets/fonts/Papyrus-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* Variables */
 :root {
     --colour-primary: #6200ea;
@@ -24,7 +33,7 @@
     --font-size-body: 16px;
     --font-size-small: 12px;
     --font-weight-bold: bold;
-    --font-family-body: 'MedievalSharp', cursive;
+    --font-family-body: 'Papyrus';
 
     --border-radius-s: 5px;
     --border-radius-m: 10px;
