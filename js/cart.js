@@ -22,9 +22,7 @@ class Cart {
 
             // Close dropdown on outside click
             document.addEventListener('click', (e) => {
-                const isClickInside =
-                    this.cartIcon.parentElement.contains(e.target) ||
-                    this.cartDropdown.contains(e.target)
+                const isClickInside = this.cartIcon.parentElement.contains(e.target) || this.cartDropdown.contains(e.target)
 
                 if (!isClickInside) {
                     this.cartDropdown.classList.remove('cart__dropdown--show')
@@ -50,12 +48,8 @@ class Cart {
     }
 
     toggleDropdown() {
-        const isVisible = this.cartDropdown.classList.contains(
-            'cart__dropdown--show'
-        )
-        document
-            .querySelectorAll('.cart__dropdown')
-            .forEach((el) => el.classList.remove('cart__dropdown--show'))
+        const isVisible = this.cartDropdown.classList.contains('cart__dropdown--show')
+        document.querySelectorAll('.cart__dropdown').forEach((el) => el.classList.remove('cart__dropdown--show'))
 
         if (!isVisible) {
             this.renderMiniCart()
@@ -77,7 +71,11 @@ class Cart {
         const count = cart.reduce((sum, item) => sum + item.quantity, 0)
         if (this.cartCountEl) {
             this.cartCountEl.textContent = count
-            this.cartCountEl.style.display = count > 0 ? 'inline-block' : 'none'
+            if (count > 0) {
+                this.cartCountEl.classList.add('cart__count--visible')
+            } else {
+                this.cartCountEl.classList.remove('cart__count--visible')
+            }
         }
     }
 
@@ -142,7 +140,12 @@ class Cart {
 
             const info = document.createElement('div')
             info.classList.add('cart__item-info')
-            info.innerHTML = `<strong>${item.name}</strong><br>£${item.price.toLocaleString()} × ${item.quantity}`
+
+            const strong = document.createElement('strong')
+            strong.textContent = item.name
+            info.appendChild(strong)
+            info.appendChild(document.createElement('br'))
+            info.appendChild(document.createTextNode(`£${item.price.toLocaleString()} × ${item.quantity}`))
 
             const removeBtn = document.createElement('button')
             removeBtn.classList.add('cart__item-remove')
@@ -161,5 +164,3 @@ class Cart {
         this.cartTotalEl.textContent = `Total: £${total.toLocaleString()}`
     }
 }
-
-export default new Cart()

@@ -159,6 +159,14 @@
     background: #555;
 }
 
+.cart__count {
+    display: none;
+}
+
+.cart__count--visible {
+    display: inline-block;
+}
+
 /* Animation */
 @keyframes cart-pop {
     0% {
