@@ -22,7 +22,9 @@ class Cart {
 
             // Close dropdown on outside click
             document.addEventListener('click', (e) => {
-                const isClickInside = this.cartIcon.parentElement.contains(e.target) || this.cartDropdown.contains(e.target)
+                const isClickInside =
+                    this.cartIcon.parentElement.contains(e.target) ||
+                    this.cartDropdown.contains(e.target)
 
                 if (!isClickInside) {
                     this.cartDropdown.classList.remove('cart__dropdown--show')
@@ -49,7 +51,9 @@ class Cart {
 
     toggleDropdown() {
         const isVisible = this.cartDropdown.classList.contains('cart__dropdown--show')
-        document.querySelectorAll('.cart__dropdown').forEach((el) => el.classList.remove('cart__dropdown--show'))
+        document
+            .querySelectorAll('.cart__dropdown')
+            .forEach((el) => el.classList.remove('cart__dropdown--show'))
 
         if (!isVisible) {
             this.renderMiniCart()
@@ -145,7 +149,9 @@ class Cart {
             strong.textContent = item.name
             info.appendChild(strong)
             info.appendChild(document.createElement('br'))
-            info.appendChild(document.createTextNode(`£${item.price.toLocaleString()} × ${item.quantity}`))
+            info.appendChild(
+                document.createTextNode(`£${item.price.toLocaleString()} × ${item.quantity}`)
+            )
 
             const removeBtn = document.createElement('button')
             removeBtn.classList.add('cart__item-remove')
